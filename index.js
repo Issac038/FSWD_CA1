@@ -33,16 +33,19 @@ const handleAsync = (fn)=>(req,res)=>
 
 app.get('/restaurant',handleAsync(async(req,res)=>{
     const restaurant = await resModel.find().populate('item') 
+    console.log("Restaurant:",restaurant)
     res.json(restaurant)
     })
 )
 app.post('/restaurant',handleAsync(async(req,res)=>{
     const restaurant = new resModel.body(req.params).save()
+    console.log("Restaurant:",restaurant)
     res.json(restaurant) 
     })
 )
 app.delete('/restaurant/:id',handleAsync(async(req,res)=>{
     const restaurant = await resModel.findByIdAndDelete(req.params.id)
+    console.log("Deleted:",restaurant)
     res.json(restaurant) 
 })
 )
@@ -52,12 +55,14 @@ app.delete('/restaurant/:id',handleAsync(async(req,res)=>{
 app.get('/item',handleAsync(async(req,res)=>{
     const item = await ItemsModel.find() 
     res.json(item)
+    console.log("Item:",item)
     })
 )
 // app.post('/',()=>{})
 app.delete('/item/:id',handleAsync(async(req,res)=>{
     const item = await ItemsModel.findByIdAndDelete(req.params.id)
     res.json(item)
+    console.log("Deleted:",item)
 }))
 // app.put('/',()=>{})
 
